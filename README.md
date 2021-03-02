@@ -1,27 +1,28 @@
 # Laboratorio 5 - MVC Primefaces Introduction - 2021-1
 ## Escuela Colombiana de Ingeniería
 ### Introducción a proyectos Web
-#### Parte I. - Jugando a ser un cliente HTTP1
+### Parte I. - Jugando a ser un cliente HTTP1
 1. **Abra una terminal Linux o consola de comandos Windows.**
 2. **Realice una conexión síncrona TCP/IP a través de *Telnet* al siguiente servidor:**
     * ***Host:*** www.escuelaing.edu.co
     * ***Puerto:*** **80**
     
-    **Teniendo en cuenta los parámetros del comando *telnet*: ```telnet HOST PORT```**
-    Para poder utilizarl el comando *telnet* prinero habra que activarlo, pues este viene deshabilitado por defecto. Para esto se ejecutara la consola de comandos de Windows como administrador y se escribira el siguiente comando:
+    **Teniendo en cuenta los parámetros del comando *telnet*: ```telnet HOST PORT```**\
+    Para poder utilizarl el comando *telnet* prinero habra que activarlo, pues este viene deshabilitado por defecto. Para esto se ejecutara la consola de comandos de Windows como administrador y se escribira el siguiente comando: \
     ``` dism /online /enable-feature /featurename:telnetclient```
     ![EnabledTelnet](./img/EnableTelnet.PNG)
+    \
     Una vez realizado esto ahora si se puede escribir el comando ```telnet www.escuelaing.edu.co 80``` en la consola
     ![Telnet](./img/Telnet.PNG)
 
 3. **Antes de que el servidor cierre la conexión por falta de comunicación:**
-    * **Revise la página 36 del *RFC del protocolo HTTP*, sobre cómo realizar una petición *GET*. Con esto, solicite al servidor el recurso *‘sssss/abc.html’*, usando la versión *1.0 de HTTP*.**
+    * **Revise la página 36 del *RFC del protocolo HTTP*, sobre cómo realizar una petición *GET*. Con esto, solicite al servidor el recurso *‘sssss/abc.html’*, usando la versión *1.0 de HTTP*.**\
     Para realizar la petición *GET* se utiliza el comando: ```GET sssss/abc.html HTTP/1.0```
     * **Asegúrese de presionar *ENTER* dos veces después de ingresar el comando.**
-    * **Revise el resultado obtenido. ¿Qué codigo de error sale?, revise el significado del mismo en *la lista de códigos de estado HTTP*.**
-    El error que se arroja es *400 Bad Request*. Lo cual significa que el servidor no puede o no procesara la petición debido a un error aparente de cliente (ej. sintaxis de petición mal formada, tamaño muy grande, framming de mensaje de solicitud invalid, o enrutamiento de solicitud engañosa)
+    * **Revise el resultado obtenido. ¿Qué codigo de error sale?, revise el significado del mismo en *la lista de códigos de estado HTTP*.**\
+    El error arrojado es *400 Bad Request*. Lo cual significa que el servidor no puede o no procesara la petición debido a un error aparente de cliente (ej. sintaxis de petición mal formada, tamaño muy grande, framming de mensaje de solicitud invalid, o enrutamiento de solicitud engañosa)
     ![PeticionGET](./img/PeticionGET.PNG)
-    * **¿Qué otros códigos de error existen?, ¿En qué caso se manejarán?**
+    * **¿Qué otros códigos de error existen?, ¿En qué caso se manejarán?**\
     Se tienen 5 grupos:
         * Respuestas informativas (100-199): Esta respuesta significa que el servidor ha recibido los encabezados de la petición, y que el cliente debería proceder a enviar el cuerpo de la misma
         * Respuestas satisfactorias (200 - 299: Esta clase de código de estado indica que la petición fue recibida correctamente, entendida y aceptada. 
@@ -33,7 +34,7 @@
     * ***Puerto:*** **80**
     * ***Versión HTTP:*** **1.1**
     
-    **Ahora, solicite (*GET*) el recurso */html*. ¿Qué se obtiene como resultado?**
+    **Ahora, solicite (*GET*) el recurso */html*. ¿Qué se obtiene como resultado?**\
     Se escribe el comando ```telnet www.httpbin.org 80``` y luego ```GET /html HTTP/1.0```, el resultado optenido es el siguiente:
     ![PeticionGET2](./img/PeticionGET2.PNG)
 
@@ -41,10 +42,10 @@
 **¡Muy bien!, ¡Acaba de usar del protocolo *HTTP* sin un navegador Web!. Cada vez que se usa un navegador, éste se conecta a un servidor *HTTP*, envía peticiones (del protocolo *HTTP*), espera el resultado de las mismas, y -si se trata de contenido HTML- lo interpreta y dibuja.**
 
 5. **Seleccione el contenido *HTML* de la respuesta y copielo al cortapapeles *CTRL-SHIFT-C*. Ejecute el comando *wc* (word count) para contar palabras con la opción *-c* para contar el número de caracteres:**
-```wc c``` 
-**Pegue el contenido del portapapeles con *CTRL-SHIFT-V* y presione *CTRL-D* (fin de archivo de Linux). Si no termina el comando *wc* presione *CTRL-D* de nuevo. No presione mas de dos veces *CTRL-D* indica que se termino la entrada y puede cerrarle la terminal. Debe salir el resultado de la cantidad de caracteres que tiene el contenido *HTML* que respondió el servidor.**
+```wc c```  
+**Pegue el contenido del portapapeles con *CTRL-SHIFT-V* y presione *CTRL-D* (fin de archivo de Linux). Si no termina el comando *wc* presione *CTRL-D* de nuevo. No presione mas de dos veces *CTRL-D* indica que se termino la entrada y puede cerrarle la terminal. Debe salir el resultado de la cantidad de caracteres que tiene el contenido *HTML* que respondió el servidor.**\
 Se guardo el contenido del HTMl en el archivo de texto *ContarHTML* que se puede encontrar en el repositorio
-![CountWords](./img/CountWords.PNG)
+![CountWords](./img/CountWords.PNG)  
     **Claro está, las peticiones *GET* son insuficientes en muchos casos. Investigue:**
     * **¿Cuál es la diferencia entre los verbos *GET* y *POST*?** 
         |                          |     GET     |     POST    |
@@ -55,6 +56,7 @@ Se guardo el contenido del HTMl en el archivo de texto *ContarHTML* que se puede
         | Comportamiento al actualizar el navegador o retroceder | Los parámetros URL no se envían de nuevo | El navegador advierte de que los datos del formulario se enviarán de nuevo  |
         | Tipo de datos     | Solo caracteres ASCII                        | Caracteres ASCII y datos binarios |
         | Longitud de datos | Limitado al máximo del URL (2048 caracteres) | Ilimitado                         |
+        
         A modo de resumen la petición:
         * GET se usa para la configuración de páginas web (filtros, ordenación, búsquedas, etc.)
         * POST se usa para la transferencia de información y datos 
@@ -69,17 +71,23 @@ Se guardo el contenido del HTMl en el archivo de texto *ContarHTML* que se puede
         * *TRACE:* Realiza una prueba de bucle de retorno de mensaje a lo largo de la ruta al recurso de destino.
         * *PATCH:* Es utilizado para aplicar modificaciones parciales a un recurso.
 6. **En la practica no se utiliza *telnet* para hacer peticiones a sitios web sino el comando *curl* con ayuda de la linea de comandos:**
-```curl www.httpbin.org```
+```
+curl www.httpbin.org
+```
 ![Curl](./img/Curl.PNG)
 **Utilice ahora el parámetro *-v* y con el parámetro *-i*:**
-```curl -v www.http bin.org```
+```
+curl -v www.http bin.org
+```
 ![CurlV](./img/CurlV.PNG)
-```curl -i www.httpbin.org```
-![CurlI](./img/CurlI.PNG)
-**¿Cuáles son las diferencias con los diferentes parámetros?**
-    * El comando con el parametro ```-v``` se usa para obtener el encabezado de la solicitud y su respuesta
-    * El comando con el parametro ```-i``` se usa para obtener el encabezado de la dirección remota
-#### Parte II. - Haciendo una aplicación Web dinámica a bajo nivel.
+```
+curl -i www.httpbin.org
+```
+![CurlI](./img/CurlI.PNG)  
+**¿Cuáles son las diferencias con los diferentes parámetros?**  
+* El comando con el parametro ```-v``` se usa para obtener el encabezado de la solicitud y su respuesta
+* El comando con el parametro ```-i``` se usa para obtener el encabezado de la dirección remota
+### Parte II. - Haciendo una aplicación Web dinámica a bajo nivel.
 **En este ejercicio, va a implementar una aplicación Web muy básica, haciendo uso de los elementos de más bajo nivel de *Java-EE* (Enterprise Edition), con el fin de revisar los conceptos del protocolo *HTTP*. En este caso, se trata de un módulo de consulta de clientes Web que hace uso de una librería de acceso a datos disponible en un repositorio *Maven* local.**
 1. **Para esto, cree un proyecto *maven* nuevo usando el arquetipo de aplicación Web estándar maven-archetype-webapp y realice lo siguiente:**
 **Revise la clase *SampleServlet* incluida a continuacion, e identifique qué hace:**
@@ -282,7 +290,7 @@ Se guardo el contenido del HTMl en el archivo de texto *ContarHTML* que se puede
 
 15. **Intente hacer diferentes consultas desde un navegador Web para probar las diferentes funcionalidades.**
 
-#### Parte III.
+### Parte III.
 1. **En su *servlet*, sobreescriba el método *doPost*, y haga la misma implementación del *doGet*.**
 
 2. **Cree el archivo *index.html* en el directorio *src/main/webapp/index.html* de la siguiente manera:**
