@@ -44,7 +44,7 @@
 5. **Seleccione el contenido *HTML* de la respuesta y copielo al cortapapeles *CTRL-SHIFT-C*. Ejecute el comando *wc* (word count) para contar palabras con la opción *-c* para contar el número de caracteres:**
 ```wc c```  
 **Pegue el contenido del portapapeles con *CTRL-SHIFT-V* y presione *CTRL-D* (fin de archivo de Linux). Si no termina el comando *wc* presione *CTRL-D* de nuevo. No presione mas de dos veces *CTRL-D* indica que se termino la entrada y puede cerrarle la terminal. Debe salir el resultado de la cantidad de caracteres que tiene el contenido *HTML* que respondió el servidor.**\
-Se guardo el contenido del HTMl en el archivo de texto *ContarHTML* que se puede encontrar en el repositorio
+Se guardo el contenido del HTMl en el archivo de texto *ContarHTML* que se puede encontrar en el repositorio  
 ![CountWords](./img/CountWords.PNG)  
     **Claro está, las peticiones *GET* son insuficientes en muchos casos. Investigue:**
     * **¿Cuál es la diferencia entre los verbos *GET* y *POST*?** 
@@ -71,19 +71,19 @@ Se guardo el contenido del HTMl en el archivo de texto *ContarHTML* que se puede
         * *TRACE:* Realiza una prueba de bucle de retorno de mensaje a lo largo de la ruta al recurso de destino.
         * *PATCH:* Es utilizado para aplicar modificaciones parciales a un recurso.
 6. **En la practica no se utiliza *telnet* para hacer peticiones a sitios web sino el comando *curl* con ayuda de la linea de comandos:**
-```
-curl www.httpbin.org  
-```
-![Curl](./img/Curl.PNG)  
-**Utilice ahora el parámetro *-v* y con el parámetro *-i*:**
-```
-curl -v www.httpbin.org  
-```
-![CurlV](./img/CurlV.PNG)  
-```
-curl -i www.httpbin.org
-```
-![CurlI](./img/CurlI.PNG)  
+    ```
+    curl www.httpbin.org  
+    ```
+    ![Curl](./img/Curl.PNG)  
+    **Utilice ahora el parámetro *-v* y con el parámetro *-i*:**
+    ```
+    curl -v www.httpbin.org  
+    ```
+    ![CurlV](./img/CurlV.PNG)  
+    ```
+    curl -i www.httpbin.org
+    ```
+    ![CurlI](./img/CurlI.PNG)  
 **¿Cuáles son las diferencias con los diferentes parámetros?**  
 * El comando con el parametro ```-v``` se usa para obtener el encabezado de la solicitud y su respuesta
 * El comando con el parametro ```-i``` se usa para obtener el encabezado de la dirección remota
@@ -380,7 +380,7 @@ El metodo usado por Service crea un html con la información del identificador d
        <welcome-file>faces/index.jsp</welcome-file>
     </welcome-file-list>
     ```
-3. **Revise cada una de las configuraciones agregadas anteriormente para saber qué hacen y por qué se necesitan. Elimine las que no se necesiten.**
+3. **Revise cada una de las configuraciones agregadas anteriormente para saber qué hacen y por qué se necesitan. Elimine las que no se necesiten.**  
 	Se puede decir que todas son necesarias:
 	* <servlet> Se utiliza para especificar un Java servlet y sus parametros, los Servlets no pueden ser llamados directamente por lo que una o mas Servlet tags y Servlet-mappigs deben existir para decirle a Tomcat cuando llamar el Servlet
 	* <servlet-mapping> Especifica un URL para el servlet definido con el tag <servlet>
@@ -444,8 +444,7 @@ El metodo usado por Service crea un html con la información del identificador d
     ```$ mvn package```
     ```$ mvn tomcat7:run```
 
-   **Si no hay errores, la aplicación debería quedar accesible en la URL: http://localhost:8080/faces/calculadora.xhtml**
-
+   **Si no hay errores, la aplicación debería quedar accesible en la URL: http://localhost:8080/faces/calculadora.xhtml**  
   ![Calculadora1](./img/Calculadora1.png)
 
 10. **Si todo funcionó correctamente, realice las siguientes pruebas:**
