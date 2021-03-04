@@ -441,8 +441,8 @@ El metodo usado por Service crea un html con la información del identificador d
     ``` <p:commandButton update="…" actionListener="…"> ```
 
 9. **Para verificar el funcionamiento de la aplicación, agregue el plugin tomcat-runner dentro de los plugins de la fase de construcción (build). Tenga en cuenta que en la configuración del plugin se indica bajo que ruta quedará la aplicación:**
-  ```$ mvn package```
-  ```$ mvn tomcat7:run```
+    ```$ mvn package```
+    ```$ mvn tomcat7:run```
 
    **Si no hay errores, la aplicación debería quedar accesible en la URL: http://localhost:8080/faces/calculadora.xhtml**
 
@@ -451,17 +451,20 @@ El metodo usado por Service crea un html con la información del identificador d
 10. **Si todo funcionó correctamente, realice las siguientes pruebas:**
     * **Abra la aplicación en un explorador. Realice algunas pruebas de aceptación con la aplicación.**
 
+        ![Prueba1](./img/PruebaDeAceptacion1.png)
+
+        ![Prueba3](./img/PruebaDeAceptacion2.png)
+
     * **Abra la aplicación en dos computadores diferentes. Si no dispone de uno, hágalo en dos navegadores diferentes (por ejemplo Chrome y Firefox; incluso se puede en un único navegador usando una ventana normal y una ventana de incógnito / privada). Haga cinco intentos en uno, y luego un intento en el otro. ¿Qué valor tiene cada uno?** 
 
-        Tienen los mismos valores puesto que el *Backing-beans* esta configurado con *@ApplicationScoped*
-
+        Tienen los mismos valores puesto que el *Backing-beans* esta configurado con *@ApplicationScoped*.
+    
         ![Calculadora2](./img/Calculadora2.png)
-
+    
     * **Aborte el proceso de *Tomcat-runner* haciendo *Ctrl+C* en la consola, y modifique el código del *backing-bean* de manera que use la anotación *@SessionScoped* en lugar de *@ApplicationScoped*. Reinicie la aplicación y repita el ejercicio anterior.**
-        
+      
     * **Dado la anterior, ¿Cuál es la diferencia entre los *backing-beans* de sesión y los de aplicación?**
-        
-          Para el backing-beans con ApplicationScoped los datos se guardaban asi se abrieran dos sesiones diferentes pues solo existe una instacia por aplicacion mientras que en SessionScoped se tiene una instancia de la aplicacion por sesion
+        Para el backing-beans con ApplicationScoped los datos se guardaban asi se abrieran dos sesiones diferentes pues solo existe una instacia por aplicacion mientras que en SessionScoped se tiene una instancia de la aplicacion por sesion\
         
     * **Por medio de las herramientas de desarrollador del explorador (Usando la tecla "F12" en la mayoría de exploradores):**
         * **Ubique el código HTML generado por el servidor.**
@@ -495,12 +498,18 @@ El metodo usado por Service crea un html con la información del identificador d
         * **Actualice la página. Los cambios de estilos realizados desaparecen, pues se realizaron únicamente en la visualización, la respuesta del servidor sigue siendo la misma, ya que el contenido de los archivos allí almacenados no se ha modificado.**
         
           ![Calculadora6](./img/Calculadora6.png)
-        
+    
         * **Revise qué otros cambios se pueden realizar y qué otra información se puede obtener de las herramientas de desarrollador.**
         
           En general se puede modificar todo el apartado visual de la pagina aunque los cambios no se guardaran al solo estar editando sobre la vista
-
+    
 11. **Para facilitar los intentos del usuario, se agregará una lista de los últimos valores ingresados:**
      * **Agregue en el *Backing-Bean*, una propiedad que contenga una lista de valores ingresados por el usuario.**
      * **Cuando se reinicie la aplicación, limpie el contenido de la lista.**
      * **Busque cómo agregar una tabla a la página, cuyo contenido sea la lista de listas de números.**
+
+
+
+### **DIAGRAMA DE CLASES**
+
+![Diagrama](./img/DiagramClass.png)
