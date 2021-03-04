@@ -295,7 +295,7 @@ Esta configurado en el puerto *8080*
     * ***request.getParameter(param);* <- Consulta el parámetro recibido, asociado al nombre *‘param’*.**
     * ***response.getWriter()* <- Retorna un objeto PrintWriter a través del cual se le puede enviar la respuesta a quien hizo la petición.**
     * ***response.setContentType(T)* <- Asigna el tipo de contenido (MIME type) que se entregará en la respuesta.**
-     
+    
     **Implemente dicho método de manera que:**
     * **Asuma que la petición *HTTP* recibe como parámetro el número de id de una lista de cosas por hacer (todo), y que dicha identificación es un número entero.**
     * **Con el identificador recibido, consulte el item por hacer de la lista de cosas por hacer, usando la clase *"Service"* creada en el punto 10.**
@@ -381,6 +381,11 @@ El metodo usado por Service crea un html con la información del identificador d
     </welcome-file-list>
     ```
 3. **Revise cada una de las configuraciones agregadas anteriormente para saber qué hacen y por qué se necesitan. Elimine las que no se necesiten.**
+	Se puede decir que todas son necesarias:
+	* <servlet> Se utiliza para especificar un Java servlet y sus parametros, los Servlets no pueden ser llamados directamente por lo que una o mas Servlet tags y Servlet-mappigs deben existir para decirle a Tomcat cuando llamar el Servlet
+	* <servlet-mapping> Especifica un URL para el servlet definido con el tag <servlet>
+	* <welcome-file-list> Especifica los archivos que seran mostrados cuando no se provee un nombre de archivo en el URL
+
 
 4. **Ahora, va a crear un Backing-Bean de sesión, el cual, para cada usuario, mantendrá de lado del servidor las siguientes propiedades:**
     1. **El conjunto de datos ingresados por el usuario.**
@@ -403,14 +408,21 @@ El metodo usado por Service crea un html con la información del identificador d
 
 5. **Cree una página *XHTML*, de nombre *calculadora.xhtml* (debe quedar en la ruta *src/main/webapp*). Revise en la página 13 del manual de *PrimeFaces*, qué espacios de nombres *XML* requiere una página de PrimeFaces y cuál es la estructura básica de la misma.**
 
+    Son necesarias:
+
+    * xmlns="http://www.w3.org/1999/xhtml"  
+    * xmlns:h="http://xmlns.jcp.org/jsf/html"  
+    * xmlns:p="http://primefaces.org/ui"  
+
 6. **Con base en lo anterior, agregue un formulario con identificador calculadora_form con el siguiente contenido básico:**
     ``` html
     <h:body>
      <h:form id="calculadora_form">
-
+    
      </h:form>
     </h:body>
     ```
+
 7. **Al formulario, agregue:**
     * **Un elemento de tipo *<p:outputLabel>* para el resultado de la moda, sin embargo, este elemento se debe ocultar. Para ocultarlo, se puede agregar el estilo display: none; al elemento. Una forma de hacerlo es por medio de la propiedad style.**
         * **En una aplicacion real, no se debería tener este elemento, solo se crea con el fin de simplificar una prueba futura.**
@@ -418,7 +430,7 @@ El metodo usado por Service crea un html con la información del identificador d
     * **Un elemento ```<p:inputText>``` para que el usuario ingrese los números. (Tenga en cuenta que una opción para separar los números es con “;” aunque no necesariamente debe hacerlo así)**
     **Por ejemplo:**
     **2; 3.5; 4.8; 5.1**
-    
+
     * **Un elemento de tipo ```<p:outputLabel>``` para mostrar cada una de las operaciones resultantes. Y asocie dichos elementos al *BackingBea* de sesión a través de su propiedad *value*, y usando como referencia el nombre asignado: *value="#{calculadoraBean.nombrePropiedad}"***
 
 8. **Al formulario, agregue dos botones de tipo ```<p:commandButton>```, cuatro para enviar la lista de números ingresados y ver el calculo de cada valor, y otro para reiniciar el juego.**
@@ -427,27 +439,68 @@ El metodo usado por Service crea un html con la información del identificador d
     ``` <p:commandButton update="calculadora_form" actionListener="#{calculadoraBean.calculateXXX}">...```
     * **El botón de reiniciar juego tendrá las mismas propiedades de *update* y *actionListener* del otro con el valor correspondiente:**
     ``` <p:commandButton update="…" actionListener="…"> ```
-9. **Para verificar el funcionamiento de la aplicación, agregue el plugin tomcat-runner dentro de los plugins de la fase de construcción (build). Tenga en cuenta que en la configuración del plugin se indica bajo que ruta quedará la aplicación:**
-```$ mvn package```
-```$ mvn tomcat7:run```
 
-    **Si no hay errores, la aplicación debería quedar accesible en la URL: http://localhost:8080/faces/calculadora.xhtml**
+9. **Para verificar el funcionamiento de la aplicación, agregue el plugin tomcat-runner dentro de los plugins de la fase de construcción (build). Tenga en cuenta que en la configuración del plugin se indica bajo que ruta quedará la aplicación:**
+  ```$ mvn package```
+  ```$ mvn tomcat7:run```
+
+   **Si no hay errores, la aplicación debería quedar accesible en la URL: http://localhost:8080/faces/calculadora.xhtml**
+
+  ![Calculadora1](./img/Calculadora1.PNG)
+
 10. **Si todo funcionó correctamente, realice las siguientes pruebas:**
     * **Abra la aplicación en un explorador. Realice algunas pruebas de aceptación con la aplicación.**
-    * **Abra la aplicación en dos computadores diferentes. Si no dispone de uno, hágalo en dos navegadores diferentes (por ejemplo Chrome y Firefox; incluso se puede en un único navegador usando una ventana normal y una ventana de incógnito / privada). Haga cinco intentos en uno, y luego un intento en el otro. ¿Qué valor tiene cada uno?**
+
+    * **Abra la aplicación en dos computadores diferentes. Si no dispone de uno, hágalo en dos navegadores diferentes (por ejemplo Chrome y Firefox; incluso se puede en un único navegador usando una ventana normal y una ventana de incógnito / privada). Haga cinco intentos en uno, y luego un intento en el otro. ¿Qué valor tiene cada uno?** 
+
+        Tienen los mismos valores puesto que el *Backing-beans* esta configurado con *@ApplicationScoped*
+
+        ![Calculadora2](./img/Calculadora2.PNG)
+
     * **Aborte el proceso de *Tomcat-runner* haciendo *Ctrl+C* en la consola, y modifique el código del *backing-bean* de manera que use la anotación *@SessionScoped* en lugar de *@ApplicationScoped*. Reinicie la aplicación y repita el ejercicio anterior.**
-        * **Dado la anterior, ¿Cuál es la diferencia entre los *backing-beans* de sesión y los de aplicación?**
-    
+        
+    * **Dado la anterior, ¿Cuál es la diferencia entre los *backing-beans* de sesión y los de aplicación?**
+        
+          Para el backing-beans con ApplicationScoped los datos se guardaban asi se abrieran dos sesiones diferentes pues solo existe una instacia por aplicacion mientras que en SessionScoped se tiene una instancia de la aplicacion por sesion
+        
     * **Por medio de las herramientas de desarrollador del explorador (Usando la tecla "F12" en la mayoría de exploradores):**
         * **Ubique el código HTML generado por el servidor.**
+        
+          ![Calculadora3](./img/Calculadora3.PNG)
+        
         * **Busque el elemento oculto, que contiene el número generado aleatoriamente.**
+        
         * **En la sección de estilos, deshabilite el estilo que oculta el elemento para que sea visible.**
+        
+          ![Calculadora4](./img/Calculadora4.PNG)
+        
         * **Observe el cambio en la página, cada vez que se realiza un cambio en el estilo.**
+        
         * **Revise qué otros estilos se pueden agregar a los diferentes elementos y qué efecto tienen en la visualización de la página.**
+        
+          Se puede cambiar:
+        
+          * La alineacion del texto
+        
+          * El color
+        
+          * El background 
+        
+          * El tamaño de la fuente 
+        
+          * La fuente Capturas 
+        
+            ![Calculadora5](./img/Calculadora5.PNG)
+        
         * **Actualice la página. Los cambios de estilos realizados desaparecen, pues se realizaron únicamente en la visualización, la respuesta del servidor sigue siendo la misma, ya que el contenido de los archivos allí almacenados no se ha modificado.**
+        
+          ![Calculadora6](./img/Calculadora6.PNG)
+        
         * **Revise qué otros cambios se pueden realizar y qué otra información se puede obtener de las herramientas de desarrollador.**
+        
+          En general se puede modificar todo el apartado visual de la pagina aunque los cambios no se guardaran al solo estar editando sobre la vista
 
 11. **Para facilitar los intentos del usuario, se agregará una lista de los últimos valores ingresados:**
-    * **Agregue en el *Backing-Bean*, una propiedad que contenga una lista de valores ingresados por el usuario.**
-    * **Cuando se reinicie la aplicación, limpie el contenido de la lista.**
-    * **Busque cómo agregar una tabla a la página, cuyo contenido sea la lista de listas de números.**
+     * **Agregue en el *Backing-Bean*, una propiedad que contenga una lista de valores ingresados por el usuario.**
+     * **Cuando se reinicie la aplicación, limpie el contenido de la lista.**
+     * **Busque cómo agregar una tabla a la página, cuyo contenido sea la lista de listas de números.**
