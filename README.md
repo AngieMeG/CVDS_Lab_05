@@ -446,7 +446,7 @@ El metodo usado por Service crea un html con la información del identificador d
 
    **Si no hay errores, la aplicación debería quedar accesible en la URL: http://localhost:8080/faces/calculadora.xhtml**
 
-  ![Calculadora1](./img/Calculadora1.PNG)
+  ![Calculadora1](./img/Calculadora1.png)
 
 10. **Si todo funcionó correctamente, realice las siguientes pruebas:**
     * **Abra la aplicación en un explorador. Realice algunas pruebas de aceptación con la aplicación.**
@@ -455,7 +455,7 @@ El metodo usado por Service crea un html con la información del identificador d
 
         Tienen los mismos valores puesto que el *Backing-beans* esta configurado con *@ApplicationScoped*
 
-        ![Calculadora2](./img/Calculadora2.PNG)
+        ![Calculadora2](./img/Calculadora2.png)
 
     * **Aborte el proceso de *Tomcat-runner* haciendo *Ctrl+C* en la consola, y modifique el código del *backing-bean* de manera que use la anotación *@SessionScoped* en lugar de *@ApplicationScoped*. Reinicie la aplicación y repita el ejercicio anterior.**
         
@@ -466,13 +466,13 @@ El metodo usado por Service crea un html con la información del identificador d
     * **Por medio de las herramientas de desarrollador del explorador (Usando la tecla "F12" en la mayoría de exploradores):**
         * **Ubique el código HTML generado por el servidor.**
         
-          ![Calculadora3](./img/Calculadora3.PNG)
+          ![Calculadora3](./img/Calculadora3.png)
         
         * **Busque el elemento oculto, que contiene el número generado aleatoriamente.**
         
         * **En la sección de estilos, deshabilite el estilo que oculta el elemento para que sea visible.**
         
-          ![Calculadora4](./img/Calculadora4.PNG)
+          ![Calculadora4](./img/Calculadora4.png)
         
         * **Observe el cambio en la página, cada vez que se realiza un cambio en el estilo.**
         
@@ -490,11 +490,11 @@ El metodo usado por Service crea un html con la información del identificador d
         
           * La fuente Capturas 
         
-            ![Calculadora5](./img/Calculadora5.PNG)
+            ![Calculadora5](./img/Calculadora5.png)
         
         * **Actualice la página. Los cambios de estilos realizados desaparecen, pues se realizaron únicamente en la visualización, la respuesta del servidor sigue siendo la misma, ya que el contenido de los archivos allí almacenados no se ha modificado.**
         
-          ![Calculadora6](./img/Calculadora6.PNG)
+          ![Calculadora6](./img/Calculadora6.png)
         
         * **Revise qué otros cambios se pueden realizar y qué otra información se puede obtener de las herramientas de desarrollador.**
         
