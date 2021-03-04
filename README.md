@@ -20,7 +20,7 @@
     Para realizar la petición *GET* se utiliza el comando: ```GET sssss/abc.html HTTP/1.0```
     * **Asegúrese de presionar *ENTER* dos veces después de ingresar el comando.**
     * **Revise el resultado obtenido. ¿Qué codigo de error sale?, revise el significado del mismo en *la lista de códigos de estado HTTP*.**\
-    El error arrojado es *400 Bad Request*. Lo cual significa que el servidor no puede o no procesara la petición debido a un error aparente de cliente (ej. sintaxis de petición mal formada, tamaño muy grande, framming de mensaje de solicitud invalid, o enrutamiento de solicitud engañosa)
+    El error arrojado es *400 Bad Request*. Lo cual significa que el servidor no puede o no procesara la petición debido a un error aparente de cliente (ej. sintaxis de petición mal formada, tamaño muy grande, framming de mensaje de solicitud invalid, o enrutamiento de solicitud engañosa)  
     ![PeticionGET](./img/PeticionGET.PNG)
     * **¿Qué otros códigos de error existen?, ¿En qué caso se manejarán?**\
     Se tienen 5 grupos:
@@ -309,17 +309,17 @@ Esta configurado en el puerto *8080*
 
 14. **Una vez hecho esto, verifique el funcionamiento de la aplicación, recompile y ejecute la aplicación.**  
 Compilación  
-![Package2](./img/Package2.png)
-Ejecución
+![Package2](./img/Package2.png)  
+Ejecución  
 ![Tomcat2](./img/Tomcat2.png)  
 15. **Intente hacer diferentes consultas desde un navegador Web para probar las diferentes funcionalidades.**  
-    * Parámetro valido
+    * Parámetro valido  
     ![Valid](./img/Valid.png)  
-    * Parámetro no existente
+    * Parámetro no existente  
     ![NotValid](./img/NotValid.png)  
-    * Parametro no pasado
+    * Parametro no pasado  
     ![Null](./img/Null.png)  
-    * Parámetro con error de formato
+    * Parámetro con error de formato  
     ![Format](./img/Format.png)  
 ### Parte III.
 1. **En su *servlet*, sobreescriba el método *doPost*, y haga la misma implementación del *doGet*.**
@@ -338,11 +338,11 @@ Ejecución
         </html>
     ```
 3. **En la página anterior, cree un formulario que tenga un campo para ingresar un número (si no ha manejado *html* antes, revise *http://www.w3schools.com/html/* ) y un botón. El formulario debe usar como método *‘POST’*, y como acción, la ruta relativa del último servlet creado (es decir la *URL* pero excluyendo *‘http://localhost:8080/’*).**  
-![FormServlet1](./img/FormServlet.png)
+![FormServlet1](./img/FormServlet.PNG)
 ![FormServlet2](./img/FormServlet2.png)  
 
 4. **Revise este ejemplo de validación de formularios con javascript y agruéguelo a su formulario, de manera que -al momento de hacer *‘submit’*- desde el browser se valide que el valor ingresado es un valor numérico.**  
-![FormInvalid](./img/FormInvalid.png)  
+![FormInvalid](./img/FormInvalid.PNG)  
 
 5. **Recompile y ejecute la aplicación. Abra en su navegador en la página del formulario, y rectifique que la página hecha anteriormente sea mostrada. Ingrese los datos y verifique los resultados. Cambie el formulario para que ahora en lugar de *POST*, use el método *GET* . Qué diferencia observa?**  
     * Usando POST  
@@ -359,7 +359,7 @@ El metodo usado por Service crea un html con la información del identificador d
 
 **Escriba una aplicación web que utilice PrimeFaces para calcular la media, la moda, la desviación estándar y varianza de un conjunto de N números reales. Este conjunto de N números reales deben ser ingresados por el usuario de manera que puedan ser utilizados para los cálculos.**
 
-**Diagrama de casos de uso de la aplicación:**
+**Diagrama de casos de uso de la aplicación:**  
  ![CasosUso](./img/CasosUso.PNG)
 
 
