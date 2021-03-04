@@ -35,7 +35,7 @@
     * ***Versión HTTP:*** **1.1**
     
     **Ahora, solicite (*GET*) el recurso */html*. ¿Qué se obtiene como resultado?**\
-    Se escribe el comando ```telnet www.httpbin.org 80``` y luego ```GET /html HTTP/1.0```, el resultado optenido es el siguiente:
+    Se escribe el comando ```telnet www.httpbin.org 80``` y luego ```GET /html HTTP/1.0```, el resultado optenido es el siguiente *html*:\
     ![PeticionGET2](./img/PeticionGET2.PNG)
 
 
@@ -72,14 +72,14 @@ Se guardo el contenido del HTMl en el archivo de texto *ContarHTML* que se puede
         * *PATCH:* Es utilizado para aplicar modificaciones parciales a un recurso.
 6. **En la practica no se utiliza *telnet* para hacer peticiones a sitios web sino el comando *curl* con ayuda de la linea de comandos:**
 ```
-curl www.httpbin.org
+curl www.httpbin.org  
 ```
-![Curl](./img/Curl.PNG)
+![Curl](./img/Curl.PNG)  
 **Utilice ahora el parámetro *-v* y con el parámetro *-i*:**
 ```
-curl -v www.http bin.org
+curl -v www.httpbin.org  
 ```
-![CurlV](./img/CurlV.PNG)
+![CurlV](./img/CurlV.PNG)  
 ```
 curl -i www.httpbin.org
 ```
@@ -89,8 +89,12 @@ curl -i www.httpbin.org
 * El comando con el parametro ```-i``` se usa para obtener el encabezado de la dirección remota
 ### Parte II. - Haciendo una aplicación Web dinámica a bajo nivel.
 **En este ejercicio, va a implementar una aplicación Web muy básica, haciendo uso de los elementos de más bajo nivel de *Java-EE* (Enterprise Edition), con el fin de revisar los conceptos del protocolo *HTTP*. En este caso, se trata de un módulo de consulta de clientes Web que hace uso de una librería de acceso a datos disponible en un repositorio *Maven* local.**
-1. **Para esto, cree un proyecto *maven* nuevo usando el arquetipo de aplicación Web estándar maven-archetype-webapp y realice lo siguiente:**
-**Revise la clase *SampleServlet* incluida a continuacion, e identifique qué hace:**
+1. **Para esto, cree un proyecto *maven* nuevo usando el arquetipo de aplicación Web estándar maven-archetype-webapp y realice lo siguiente:**  
+    ```
+    mvn archetype:generate -DartifactId=Webapp -DgroupId=edu.eci.cvds -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+    ```
+    **Revise la clase *SampleServlet* incluida a continuacion, e identifique qué hace:**
+    Los modulos servlet sirven para extender las capacidades de los sevidores web. La clase en particular es un servlet que al resiviruna petcición GET imprimira "Hello *[parameter]*"
     ``` java
     package edu.eci.cvds.servlet;
     import java.io.IOException;
@@ -123,7 +127,7 @@ curl -i www.httpbin.org
     **Revise qué valor tiene el parámetro *‘urlPatterns’* de la anotación *@WebServlet*, pues este indica qué URLs atiende las peticiones el *servlet*.**
 
 2. **En el *pom.xml*, modifique la propiedad *"packaging"* con el valor *"war"*. Agregue la siguiente dependencia:**
-    ```
+    ``` xml
     <dependency>
          <groupId>javax</groupId>
          <artifactId>javaee-web-api</artifactId>
@@ -132,7 +136,7 @@ curl -i www.httpbin.org
     </dependency>
     ```
     **y agregue la seccion build al final del tag *project* en el archivo *pom.xml*:**
-    ```
+    ``` xml
     <build>
        <plugins>
            <plugin>
@@ -190,20 +194,37 @@ curl -i www.httpbin.org
        </plugins>
     </build>
     ```
-3. **Revise en el *pom.xml* para qué puerto TCP/IP está configurado el servidor embebido de *Tomcat* (ver sección de plugins).**
+3. **Revise en el *pom.xml* para qué puerto TCP/IP está configurado el servidor embebido de *Tomcat* (ver sección de plugins).**  
+Esta configurado en el puerto *8080*
 
 4. **Compile y ejecute la aplicación en el servidor embebido *Tomcat*, a través de *Maven* con:**
 ```mvn package```
-```mvn tomcat7:run```
-5. **Abra un navegador, y en la barra de direcciones ponga la *URL* con la cual se le enviarán peticiones al *‘SampleServlet’*. Tenga en cuenta que la *URL* tendrá como host *‘localhost’*, como puerto, el configurado en el *pom.xml* y el path debe ser el del *Servlet*. Debería obtener un mensaje de saludo.**
+```mvn tomcat7:run```  
+![Tomcat](./img/Tomcat.PNG)  
+5. **Abra un navegador, y en la barra de direcciones ponga la *URL* con la cual se le enviarán peticiones al *‘SampleServlet’*. Tenga en cuenta que la *URL* tendrá como host *‘localhost’*, como puerto, el configurado en el *pom.xml* y el path debe ser el del *Servlet*. Debería obtener un mensaje de saludo.**  
+![SampleServlet](./img/SampleServlet.png)  
 
-6. **Observe que el *Servlet* *‘SampleServlet’* acepta peticiones *GET*, y opcionalmente, lee el parámetro *‘name’*. Ingrese la misma *URL*, pero ahora agregando un parámetro *GET* (si no sabe como hacerlo, revise la documentación en http://www.w3schools.com/tags/ref_httpmethods.asp).**
+6. **Observe que el *Servlet* *‘SampleServlet’* acepta peticiones *GET*, y opcionalmente, lee el parámetro *‘name’*. Ingrese la misma *URL*, pero ahora agregando un parámetro *GET* (si no sabe como hacerlo, revise la documentación en http://www.w3schools.com/tags/ref_httpmethods.asp).**  
+![SampleServlet2](./img/SampleServlet2.png)  
 
 7. **Busque el artefacto *gson* en el repositorio de *maven* y agregue la dependencia.**
-
+    ``` xml
+    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.8.6</version>
+    </dependency>
+    ```
 8. **En el navegador revise la dirección https://jsonplaceholder.typicode.com/todos/1. Intente cambiando diferentes números al final del *path* de la url.**
+    * Id = 1  
+    ![Json1](./img/json1.png)  
+    * Id = 10  
+    ![Json2](./img/json2.png)  
+    * Id = 20  
+    ![Json3](./img/json3.png)  
 
-9. **Basado en la respuesta que le da el servicio del punto anterior, cree la clase *edu.eci.cvds.servlet.model*.Todo con un constructor vacío y los métodos **getter** y **setter** para las propiedades de los "To Dos" que se encuentran en la url indicada.**
+9. **Basado en la respuesta que le da el servicio del punto anterior, cree la clase *edu.eci.cvds.servlet.model.Todo* con un constructor vacío y los métodos **getter** y **setter** para las propiedades de los "To Dos" que se encuentran en la url indicada.**
 
 10. **Utilice la siguiente clase para consumir el servicio que se encuentra en la dirección url del punto anterior:**
     ``` java
@@ -286,10 +307,20 @@ curl -i www.httpbin.org
         * **Si se genera la excepcion *MalformedURLException* devolver el código de *error interno en el servidor***
         * **Para cualquier otra excepcion, devolver el código equivalente a *requerimiento inválido*.**
 
-14. **Una vez hecho esto, verifique el funcionamiento de la aplicación, recompile y ejecute la aplicación.**
-
-15. **Intente hacer diferentes consultas desde un navegador Web para probar las diferentes funcionalidades.**
-
+14. **Una vez hecho esto, verifique el funcionamiento de la aplicación, recompile y ejecute la aplicación.**  
+Compilación  
+![Package2](./img/Package2.png)
+Ejecución
+![Tomcat2](./img/Tomcat2.png)  
+15. **Intente hacer diferentes consultas desde un navegador Web para probar las diferentes funcionalidades.**  
+    * Parámetro valido
+    ![Valid](./img/Valid.png)  
+    * Parámetro no existente
+    ![NotValid](./img/NotValid.png)  
+    * Parametro no pasado
+    ![Null](./img/Null.png)  
+    * Parámetro con error de formato
+    ![Format](./img/Format.png)  
 ### Parte III.
 1. **En su *servlet*, sobreescriba el método *doPost*, y haga la misma implementación del *doGet*.**
 
@@ -306,14 +337,22 @@ curl -i www.httpbin.org
             </body>
         </html>
     ```
-3. **En la página anterior, cree un formulario que tenga un campo para ingresar un número (si no ha manejado *html* antes, revise *http://www.w3schools.com/html/* ) y un botón. El formulario debe usar como método *‘POST’*, y como acción, la ruta relativa del último servlet creado (es decir la *URL* pero excluyendo *‘http://localhost:8080/’*).**
+3. **En la página anterior, cree un formulario que tenga un campo para ingresar un número (si no ha manejado *html* antes, revise *http://www.w3schools.com/html/* ) y un botón. El formulario debe usar como método *‘POST’*, y como acción, la ruta relativa del último servlet creado (es decir la *URL* pero excluyendo *‘http://localhost:8080/’*).**  
+![FormServlet1](./img/FormServlet.png)
+![FormServlet2](./img/FormServlet2.png)  
 
-4. **Revise este ejemplo de validación de formularios con javascript y agruéguelo a su formulario, de manera que -al momento de hacer *‘submit’*- desde el browser se valide que el valor ingresado es un valor numérico.**
+4. **Revise este ejemplo de validación de formularios con javascript y agruéguelo a su formulario, de manera que -al momento de hacer *‘submit’*- desde el browser se valide que el valor ingresado es un valor numérico.**  
+![FormInvalid](./img/FormInvalid.png)  
 
-5. **Recompile y ejecute la aplicación. Abra en su navegador en la página del formulario, y rectifique que la página hecha anteriormente sea mostrada. Ingrese los datos y verifique los resultados. Cambie el formulario para que ahora en lugar de *POST*, use el método *GET* . Qué diferencia observa?**
-
-6. **¿Qué se está viendo? Revise cómo están implementados los métodos de la clase Service.java para entender el funcionamiento interno.**
-
+5. **Recompile y ejecute la aplicación. Abra en su navegador en la página del formulario, y rectifique que la página hecha anteriormente sea mostrada. Ingrese los datos y verifique los resultados. Cambie el formulario para que ahora en lugar de *POST*, use el método *GET* . Qué diferencia observa?**  
+    * Usando POST  
+    ![FormServlet2](./img/FormServlet2.png)  
+    * Usando GET  
+    ![FormServlet3](./img/FormServlet3.png)
+    
+    La diferencia es que con POST el URL aparece sin el nombre ni valor del parametro ingresado y con GET esta información si es visible
+6. **¿Qué se está viendo? Revise cómo están implementados los métodos de la clase Service.java para entender el funcionamiento interno.**  
+El metodo usado por Service crea un html con la información del identificador del usuario, el identificador (el cual tiene como valor lo que se ingresó en el formulario), un texto y si esta completo o no.  
 #### Parte IV. - Frameworks Web MVC – Java Server Faces / Prime Faces
 
 **En este ejercicio, usted va a desarrollar una aplicación Web basada en el marco JSF, y en una de sus implementaciones más usadas: *PrimeFaces.***

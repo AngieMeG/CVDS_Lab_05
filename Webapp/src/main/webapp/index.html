@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <script>
+        function validateForm(){
+            var value, text;
+            value = document.getElementById("id").value;
+            if (isNaN(value)){
+                alert("Entrada no valida")
+                return false;
+            }
+        }
+    </script>
+    <body>
+        <form name="numberFrom" action="http://localhost:8080/jsonServlet" method="GET" onsubmit="return validateForm()">
+            <fieldset>
+                <legend> Ingrese el id</legend>
+                <div>
+                    <label for="id">Número: </label><br>
+                    <input type = "text" id = "id" name="id"/> <br><br>
+                </div>
+                <div>
+                    <input type="submit" value="Enviar">
+                </div>
+            </fieldset>
+          </form> 
+        <p id="demo"></p>
+    </body>
+</html>
