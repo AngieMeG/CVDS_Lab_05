@@ -56,6 +56,7 @@ public class JsonServlet extends HttpServlet{
             responseWriter.flush();   
         }
     }
+<<<<<<< HEAD
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -90,4 +91,6 @@ public class JsonServlet extends HttpServlet{
             responseWriter.flush();   
         }
     }
+=======
+>>>>>>> 765ee3a3aafb181fc0f3e8cb3a2e352bc6e261f7
 }
