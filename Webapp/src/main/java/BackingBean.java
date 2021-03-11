@@ -1,6 +1,7 @@
 import java.lang.Math;
 import java.lang.String;
 import java.util.Arrays;
+import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
 
@@ -14,6 +15,7 @@ public class BackingBean{
 	private double standardDeviation;
 	private double mean;
 	private double mode;
+	private ArrayList<String> backup;
 
 	public BackingBean(){
 		list="";
@@ -22,6 +24,9 @@ public class BackingBean{
 		mode = 0;
 		mean = 0;
 		values = new double[]{0};
+		backup = new ArrayList<String>();
+		backup.add("1");
+		backup.add("2");
 	}
 
 	public double calculateMean(double values[]){
@@ -76,6 +81,7 @@ public class BackingBean{
 		mean = 0;
 		values = new double[]{0};
 		list = "";
+		backup.clear();
 	}
 
 	public double[] getValues(){
@@ -84,6 +90,7 @@ public class BackingBean{
 
 	public void setList(String values){
 		list = values;
+		if(backup.size()==0 || !values.equals(backup.get(backup.size()-1))) backup.add(values);
 		String[] parts = values.split(";");
 		this.values = new double[parts.length];
 		for(int i=0; i<parts.length; i++){
@@ -109,5 +116,13 @@ public class BackingBean{
 
 	public double getMode(){
 		return mode;
+	}
+
+	public ArrayList<String> getBackup(){
+		return backup;
+	}
+
+	public String passing(String value){
+		return value;
 	}
 }

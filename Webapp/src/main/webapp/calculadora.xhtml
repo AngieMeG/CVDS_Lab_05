@@ -5,7 +5,7 @@
     xmlns:p="http://primefaces.org/ui"  
     xmlns:f="http://xmlns.jcp.org/jsf/core">  
 <h:head>  
-<title>Increiblemente funciona sin razon alguna pues es el mismo codigo que hace una hora YEI! :D</title>  
+<title>Calculadora</title>  
 </h:head>  
 <h:body>
 <h:form id="calculadora_form">  
@@ -15,7 +15,7 @@
 		<p:outputLabel value="Values"/>
 		<h:inputText value="#{calculadoraBean.list}"/>
 	
-		<p:commandButton value="Calculate Mode" update="calculadora_form" actionListener="#{calculadoraBean.calculateMode(calculadoraBean.values)}"/>
+		<p:commandButton value="Calculate Mode" update="calculadora_form " actionListener="#{calculadoraBean.calculateMode(calculadoraBean.values)}"/>
 		<h:outputText value="Mode: #{calculadoraBean.mode}"/>
 	
 		<p:commandButton value="Calculate Variance" update="calculadora_form" actionListener="#{calculadoraBean.calculateVariance(calculadoraBean.values)}"/>
@@ -28,8 +28,15 @@
 		<h:outputText value="Mean: #{calculadoraBean.mean}"/>
 
 		<p:commandButton value="restart" update="calculadora_form" actionListener="#{calculadoraBean.restart()}"/>
-
 	</h:panelGrid>
+	<div class="card">
+        	<p:dataTable var="values" value="#{calculadoraBean.backup}" scrollable="true">
+	    		<p:column headerText="Values">
+               	 		<h:outputText value="#{calculadoraBean.passing(values)}"/>
+           		</p:column>
+        	</p:dataTable>
+    	</div>
+	
 </h:form>
 </h:body>  
 </html>  
